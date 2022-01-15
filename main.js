@@ -34,7 +34,7 @@ function createGrid(num) {
   }
 }
 
-createGrid(10);
+createGrid(50);
 
 function resetContainer() {
   while (container.firstChild) {
@@ -104,16 +104,20 @@ function colorizeContainer() {
     } else {
       randomPixel.style.opacity = 0.1;
     }
-
+    if (parseFloat(randomPixel.style.opacity) > 1) {
+      randomPixel.style.opacity = 0.1;
+    }
+    //disable  colorizer
     stopColButton.addEventListener('click', () => {
       clearInterval(start)
       counterColorize = 0;
     })
-  }, 100);
+  }, 10);
   counterColorize++
   console.log(counterColorize)
 }
 
 colorizer.addEventListener('click', colorizeContainer)
 
-//disable  colorizer
+
+// colorizer.addEventListener('click', blackerizeContainer)

@@ -41,3 +41,7 @@ body {
   width: 20vw;
   height: 20vh;
 }
+
+.pixel {
+  transition: all 0.7s;
+}
