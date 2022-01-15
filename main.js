@@ -2,6 +2,7 @@ const body = document.querySelector('body');
 const container = document.querySelector('.container');
 const shooButton = document.querySelector('.shoo-button')
 const popupWindow = document.querySelector('.popup')
+const colorizer = document.querySelector('.colorizer')
 
 function createPixel() {
   let div = document.createElement('div');
@@ -62,7 +63,7 @@ function shooShoo() {
   popup.classList.add('popup');
   modal.classList.add('popup-modal');
   button.classList.add('modal-button');
-  title.textContent = 'Hello';
+  title.textContent = 'Pick new size';
   button.textContent = 'Cleaning time';
   modal.append(title);
   modal.append(createNumInput())
@@ -85,3 +86,16 @@ function shooShoo() {
 }
 
 shooButton.addEventListener('click', shooShoo)
+
+//automatically colorize container
+
+function colorizeContainer() {
+  let pixels = document.querySelectorAll('.pixel')
+  setInterval(() => {
+    let randomPixel = Math.ceil(Math.random() * pixels.length - 1);
+    pixels[randomPixel].style.background = `rgb(${colorRandomizer()},${colorRandomizer()},${colorRandomizer()})`
+  }, 0);
+  console.log(pixels.length)
+}
+
+colorizer.addEventListener('click', colorizeContainer)
