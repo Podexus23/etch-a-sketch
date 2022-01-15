@@ -3,6 +3,7 @@ const container = document.querySelector('.container');
 const shooButton = document.querySelector('.shoo-button')
 const popupWindow = document.querySelector('.popup')
 const colorizer = document.querySelector('.colorizer')
+let counterColorize = 0;
 
 function createPixel() {
   let div = document.createElement('div');
@@ -77,7 +78,7 @@ function shooShoo() {
     resetContainer()
     if (parseInt(pixelCounter) > 100) pixelCounter = 100;
     createGrid(parseInt(pixelCounter));
-
+    counterColorize = 0;
     console.log('complete')
   })
 
@@ -88,14 +89,31 @@ function shooShoo() {
 shooButton.addEventListener('click', shooShoo)
 
 //automatically colorize container
+const stopColButton = document.querySelector('.stop-colorizer');
+
+
 
 function colorizeContainer() {
+
   let pixels = document.querySelectorAll('.pixel')
-  setInterval(() => {
-    let randomPixel = Math.ceil(Math.random() * pixels.length - 1);
-    pixels[randomPixel].style.background = `rgb(${colorRandomizer()},${colorRandomizer()},${colorRandomizer()})`
-  }, 0);
-  console.log(pixels.length)
+  let start = setInterval(() => {
+    let randomPixel = pixels[Math.ceil(Math.random() * pixels.length - 1)];
+    randomPixel.style.background = `rgb(${colorRandomizer()},${colorRandomizer()},${colorRandomizer()})`;
+    if (randomPixel.style.opacity) {
+      randomPixel.style.opacity = parseFloat(randomPixel.style.opacity) + 0.1;
+    } else {
+      randomPixel.style.opacity = 0.1;
+    }
+
+    stopColButton.addEventListener('click', () => {
+      clearInterval(start)
+      counterColorize = 0;
+    })
+  }, 100);
+  counterColorize++
+  console.log(counterColorize)
 }
 
 colorizer.addEventListener('click', colorizeContainer)
+
+//disable  colorizer
